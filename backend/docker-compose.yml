@@ -1,0 +1,21 @@
+services:
+  app:
+    container_name: test_app
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    command: npm run dev
+  db:
+    image: mysql:8.0.33
+    container_name: test_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:
